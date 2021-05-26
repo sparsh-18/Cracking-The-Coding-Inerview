@@ -1,4 +1,4 @@
-package CTCI.LinkedList;
+
 import java.util.Scanner;
 public class Q1_RemoveDup {
 
