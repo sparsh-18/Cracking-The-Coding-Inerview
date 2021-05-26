@@ -1,4 +1,4 @@
-package CTCI.LinkedList;
+
 import java.util.Scanner;
 public class Q2_kthToLast {
     public static void main(String[] args) {
