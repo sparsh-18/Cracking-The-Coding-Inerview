@@ -1,4 +1,3 @@
-package CTCI.LinkedList;
 
 public class LinkList {
     Node head;
