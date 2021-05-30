@@ -87,6 +87,15 @@ public class LinkList {
         }
     }
 
+    public int lengthList() {
+        int c = 0;
+        while (head != null) {
+            c++;
+            head = head.next;
+        }
+        return c;
+    }
+
     public static void main(String args[]) {
         LinkList obj = new LinkList();
         obj.insert_end(10);
