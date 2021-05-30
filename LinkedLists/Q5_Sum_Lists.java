@@ -14,11 +14,12 @@ public class Q5_Sum_Lists {
         q.insert_end(8);
         q.insert_end(5);
 
-        int sum = (new Q5_Sum_Lists()).calculate(p.head,q.head);
-        System.out.println(sum);
+        LinkList sum = (new Q5_Sum_Lists()).calculate(p.head,q.head);
+        sum.display();
     }
 
-    public int calculate(Node p, Node q) {
+    public LinkList calculate(Node p, Node q) {
+        LinkList res = new LinkList();
         int carry = 0;
         int number = 0, i=0;
 
@@ -39,14 +40,20 @@ public class Q5_Sum_Lists {
             i++;
             carry = sumOfRem/10;
 
+            res.insert_end(lastDigit);
+
             // p=p.next;
             // q=q.next;
         }
 
         if(carry != 0) {
             number = number + carry*(int)Math.pow(10,i);
+
+            res.insert_end(carry);
         }
 
-        return number; 
+        System.out.println(number);
+
+        return res;
     }
 }

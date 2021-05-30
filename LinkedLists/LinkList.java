@@ -76,6 +76,17 @@ public class LinkList {
         }
     }
 
+    public void addListEnd(LinkList b) {
+        if (head == null) {
+            head = b.head;
+        }else {
+            while (head.next != null) {
+                head = head.next;
+            }
+            head.next = b.head;
+        }
+    }
+
     public static void main(String args[]) {
         LinkList obj = new LinkList();
         obj.insert_end(10);
