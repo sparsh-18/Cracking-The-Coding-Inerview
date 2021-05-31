@@ -80,18 +80,20 @@ public class LinkList {
         if (head == null) {
             head = b.head;
         }else {
-            while (head.next != null) {
-                head = head.next;
+            Node t=head;
+            while (t.next != null) {
+                t = t.next;
             }
-            head.next = b.head;
+            t.next = b.head;
         }
     }
 
     public int lengthList() {
         int c = 0;
-        while (head != null) {
+        Node t = head;
+        while (t != null) {
             c++;
-            head = head.next;
+            t = t.next;
         }
         return c;
     }
