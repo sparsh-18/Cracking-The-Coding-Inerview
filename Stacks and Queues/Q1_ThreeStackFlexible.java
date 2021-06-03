@@ -1,4 +1,16 @@
 public class Q1_ThreeStackFlexible {
+
+    /* suppose n=6 and 3 stacks to be formed then,
+        array -  [___|___|___|___|___|___]
+                   0   1   2   3   4   5
+
+        size  -  [0|0|0]
+
+        capacity- [2|2|2]
+
+        start -  [0|2|4]
+    * */
+
     int array[], size[], capacity[], start[], n, noOfStacks;
     public Q1_ThreeStackFlexible (int n, int noOfStacks) {
         this.n = n;
@@ -17,11 +29,13 @@ public class Q1_ThreeStackFlexible {
         start[noOfStacks-1] = capacity[noOfStacks-2] + start[noOfStacks-2];
     }
 
+    // eg. n=6 for 8 .. 8%6 = 2  or  for -1  -1%6 = -1  +6  = 5 %6 = 5
     public int adjust(int index) {
         index = ((index % array.length) + array.length) % array.length;
         return index;
     }
 
+    // if all index full in array
     public boolean fullarray() {
         int sum = 0;
         for (int i = 0; i < size.length; i++) {
@@ -31,6 +45,9 @@ public class Q1_ThreeStackFlexible {
         else  return false;
     }
 
+    // for a stack the index to be shifted  ..  start <= index < end
+    // if stack of size 2 for array[6] is like .. [5|0]  then here 0 < 5(starting) so we add 6(array's length) i.e. 0+6 = 6
+    // now  5(start)  <= 6 < 7 (start+capacity)
     public boolean inRange(int i, int stack) {
         if(i < 0 || i > array.length) return false;
 
@@ -41,16 +58,21 @@ public class Q1_ThreeStackFlexible {
     }
 
     public void shift(int stack) {
+        //if the stack to be shifted is full then shift next stack and increment the capacity of the current stack
         if (size[stack] == capacity[stack]){
             shift((stack+1)%noOfStacks);
             capacity[stack]++;
         }
-        int index = adjust(start[stack] + capacity[stack] -1);
+        int index = adjust(start[stack] + capacity[stack] -1);  // last index of the stack
+
+        // while that index is in the stack's range copy the previous  element in it and reduce index by 1
         while (inRange(index, stack)) {
             array[index] = array[adjust(index-1)];
             index = adjust(index-1);
         }
-        array[adjust(index+1)] = 0;
+
+        array[adjust(index+1)] = 0; // the start index is shifted forward so putting 0 in the place of old start index
+
         start[stack] = adjust(start[stack] + 1);
         capacity[stack]--;
     }
