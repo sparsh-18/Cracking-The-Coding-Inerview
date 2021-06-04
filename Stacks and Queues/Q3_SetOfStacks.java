@@ -57,6 +57,41 @@ public class Q3_SetOfStacks {
         return e;
     }
 
+    // follow up ------------------------------------------------------------
+    public int popAtIndex(int indexofStack) {
+        if(indexofStack >= array.size()) return -9999;
+
+        Stackk s = array.get(indexofStack);
+        if(s.isEmpty()) return -9999;
+        int e = s.ar[s.top];
+        s.top--;
+        shift(indexofStack+1);
+        return  e;
+    }
+
+    public void shift(int indexOfNextStack) {
+        if(indexOfNextStack < array.size()) {
+            Stackk s_above = array.get(indexOfNextStack);
+            Stackk s_below = array.get(indexOfNextStack-1);
+
+            s_below.ar[++s_below.top] = s_above.ar[0];
+
+            for (int i = 0; i < s_above.top; i++) {
+                s_above.ar[i] = s_above.ar[i+1];
+            }
+            s_above.top--;
+
+            if(s_above.isEmpty()) {
+                array.remove(indexOfNextStack);
+                shift(indexOfNextStack);
+            }
+            else
+                shift(indexOfNextStack+1);
+        }
+    }
+    //--------------------------------------------------------------------------
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter size of each set stack");
@@ -66,7 +101,7 @@ public class Q3_SetOfStacks {
 
         int ch;
         do {
-            System.out.println("1-push\n2-pop\n-1 to exit");
+            System.out.println("1-push\n2-pop\n3 - pop from a set\n-1 to exit");
             ch = sc.nextInt();
 
             switch (ch){
@@ -77,6 +112,13 @@ public class Q3_SetOfStacks {
                     break;
                 case 2:
                     int e = ob.pop();
+                    if(e==-9999) System.out.println("Stak Empty");
+                    else System.out.println(e);
+                    break;
+                case 3:
+                    System.out.println("Enter stack index b/w 0 to "+(ob.array.size()-1));
+                    int indexOfSet = sc.nextInt();
+                    e = ob.popAtIndex(indexOfSet);
                     if(e==-9999) System.out.println("Stak Empty");
                     else System.out.println(e);
                     break;
