@@ -103,7 +103,7 @@ public class Q3_SetOfStacks {
         do {
             System.out.println("1-push\n2-pop\n3 - pop from a set\n-1 to exit");
             ch = sc.nextInt();
-
+            if (ch==-1) break;
             switch (ch){
                 case 1:
                     System.out.println("Enter element");
